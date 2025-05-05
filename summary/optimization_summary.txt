@@ -1,0 +1,66 @@
+AGRICULTURAL PARAMETER OPTIMIZATION SUMMARY
+==========================================
+
+Scenario: optimize_for_Maize
+Expected Yield: 731728.5000
+Expected Loss: 3.4374%
+Effective Yield: 706575.9375
+Optimal Parameters:
+  area: 1858670.8765
+  fertilizer: 222857351.3937
+  pesticide: 145311.1429
+  season_Rabi       : 1.1260
+  crop: Maize
+
+Scenario: optimize_for_Rice
+Expected Yield: 731728.5000
+Expected Loss: 3.4374%
+Effective Yield: 706575.9375
+Optimal Parameters:
+  area: 1858670.8765
+  fertilizer: 222857351.3937
+  pesticide: 145311.1429
+  season_Rabi       : 1.1260
+  crop: Rice
+
+Scenario: optimize_for_Urad
+Expected Yield: 731728.5000
+Expected Loss: 3.4374%
+Effective Yield: 706575.9375
+Optimal Parameters:
+  area: 1858670.8765
+  fertilizer: 222857351.3937
+  pesticide: 145311.1429
+  season_Rabi       : 1.1260
+  crop: Urad
+
+Scenario: maximize_effective_yield
+Expected Yield: 731728.5000
+Expected Loss: 3.4374%
+Effective Yield: 706575.9375
+Optimal Parameters:
+  area: 1858670.8765
+  fertilizer: 222857351.3937
+  pesticide: 145311.1429
+  season_Rabi       : 1.1260
+
+Scenario: maximize_raw_yield
+Expected Yield: 731728.5000
+Expected Loss: 3.4374%
+Effective Yield: 706575.9375
+Optimal Parameters:
+  area: 1858670.8765
+  fertilizer: 222857351.3937
+  pesticide: 145311.1429
+  season_Rabi       : 1.1260
+
+Scenario: minimize_waste
+Expected Yield: 731728.5000
+Expected Loss: 3.4374%
+Effective Yield: 706575.9375
+Optimal Parameters:
+  area: 1858670.8765
+  fertilizer: 222857351.3937
+  pesticide: 145311.1429
+  season_Rabi       : 1.1260
+
