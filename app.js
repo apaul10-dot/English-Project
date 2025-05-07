@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const ngrok = require('ngrok');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
+
 
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
@@ -22,6 +23,10 @@ app.get('/model1', (req, res) => {
 
 app.get('/model2', (req, res) => {
     res.render('model2');
+});
+
+app.get('/food-insecurity', (req, res) => {
+    res.render('food-insecurity');
 });
 
 // Error handling middleware
