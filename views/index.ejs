@@ -10,7 +10,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
         }
@@ -20,6 +20,27 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+        }
+        .mission-statement {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #1a73e8;
+        }
+        .mission-statement h2 {
+            color: #1a73e8;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .mission-statement p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin: 0;
+            text-align: left;
         }
         h1 {
             color: #1a73e8;
@@ -29,6 +50,7 @@
             display: flex;
             gap: 1rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
         .button {
             padding: 1rem 2rem;
@@ -56,6 +78,10 @@
 </head>
 <body>
     <div class="container">
+        <div class="mission-statement">
+            <h2>Our Mission</h2>
+            <p>At Hunger Stoppers, our mission is to eliminate food insecurity by leveraging technology, community partnerships, and sustainable practices to ensure equitable access to nutritious food for all. We are committed to bridging the gap between surplus and scarcity by connecting local producers, donors, and organizations with individuals and families in need—empowering communities, reducing waste, and fostering a future where no one goes hungry.</p>
+        </div>
         <h1>ML Model Interface</h1>
         <div class="button-container">
             <a href="/model1" class="button button-1">Model 1</a>
