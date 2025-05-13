@@ -45,8 +45,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Model 2 Interface</h1>
-        <p>This is where you can implement your second ML model interface.</p>
+        <h1>Household Food Waste Prediction</h1>
+        <form method="POST" action="/model2">
+            <label>Household Size: <input type="number" name="household_size" min="1" required></label><br><br>
+            <label>Income: <input type="number" name="income" min="0" required></label><br><br>
+            <label>Meals Per Day: <input type="number" name="meals_per_day" min="1" max="10" required></label><br><br>
+            <label>Food Expenditure: <input type="number" name="food_expenditure" min="0" required></label><br><br>
+            <button type="submit">Predict Food Waste</button>
+        </form>
+        <% if (typeof prediction !== 'undefined') { %>
+            <h2>Predicted Household Food Waste: <%= prediction %> kg</h2>
+        <% } %>
         <a href="/" class="back-button">Back to Home</a>
     </div>
 </body>

@@ -7,13 +7,51 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
-            position: relative;
+            min-height: 100vh;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #1a73e8;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0.5rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            height: 60px;
+        }
+        .navbar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-right: 3rem;
+        }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            padding-top: 60px; /* for navbar */
+            box-sizing: border-box;
+        }
+        .welcome-message {
+            margin-left: 5vw;
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-size: 2rem;
+            color: #1a73e8;
+            font-weight: bold;
         }
         .container {
             text-align: center;
@@ -83,20 +121,39 @@
         .button:hover {
             opacity: 0.9;
         }
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-right: auto;
+        }
+        .navbar-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: text-decoration 0.2s, color 0.2s;
+        }
+        .navbar-link:hover {
+            text-decoration: underline;
+            color: #cce0ff;
+        }
     </style>
 </head>
 <body>
-    <div>
-        <img src="/Users/Arka/noscrolling-app-1/English-Project/English-Project/public/images/logo.png" alt="Website Logo" class="logo">
-        <div class="mission-statement">
-            <h2>Our Mission</h2>
-            <p>At Hunger Stoppers, our mission is to eliminate food insecurity by leveraging technology, community partnerships, and sustainable practices to ensure equitable access to nutritious food for all. We are committed to bridging the gap between surplus and scarcity by connecting local producers, donors, and organizations with individuals and families in need—empowering communities, reducing waste, and fostering a future where no one goes hungry.</p>
+    <div class="navbar">
+        <span class="navbar-title">HUNGER STOPPERS</span>
+        <div class="navbar-links">
+            <a href="/food-insecurity" class="navbar-link">Learn About Food Insecurity</a>
+            <a href="/model1" class="navbar-link">Model 1 Results</a>
+            <a href="/model2" class="navbar-link">Model 2 Results</a>
+            <a href="/about" class="navbar-link">About Us</a>
         </div>
-        <h1>ML Model Interface</h1>
-        <div class="button-container">
-            <a href="/model1" class="button button-1">Model 1</a>
-            <a href="/model2" class="button button-2">Model 2</a>
-            <a href="/food-insecurity" class="button button-3">Learn About Food Insecurity</a>
+        <img src="/images/logo.png" alt="Website Logo" class="logo">
+    </div>
+    <div class="main-content">
+        <div class="welcome-message">
+            Welcome to Hunger Stoppers
         </div>
     </div>
 </body>

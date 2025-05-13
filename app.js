@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const ngrok = require('ngrok');
+const axios = require('axios');
+const bodyParser = require('body-parser');
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 
 // Set up EJS as the view engine
@@ -11,6 +13,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files
 app.use(express.static('public'));
+
+// Middleware for parsing form data
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Routes
 app.get('/', (req, res) => {
@@ -27,6 +33,22 @@ app.get('/model2', (req, res) => {
 
 app.get('/food-insecurity', (req, res) => {
     res.render('food-insecurity');
+});
+
+app.post('/model2', async (req, res) => {
+    const { household_size, income, meals_per_day, food_expenditure } = req.body;
+    try {
+        const response = await axios.post('http://localhost:5002/predict', {
+            household_size: Number(household_size),
+            income: Number(income),
+            meals_per_day: Number(meals_per_day),
+            food_expenditure: Number(food_expenditure)
+        });
+        const prediction = response.data.predicted_waste_kg;
+        res.render('model2', { prediction });
+    } catch (error) {
+        res.render('model2', { prediction: 'Error: Could not get prediction.' });
+    }
 });
 
 // Error handling middleware
