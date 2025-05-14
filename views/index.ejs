@@ -104,5 +104,76 @@
             Welcome to Hunger Stoppers
         </div>
     </div>
+    <!-- Chatbot Button -->
+    <button id="chatbotBtn" style="position:fixed;bottom:32px;right:32px;background:#2196f3;color:#fff;border:none;border-radius:50%;width:60px;height:60px;box-shadow:0 2px 8px rgba(0,0,0,0.15);font-size:2rem;cursor:pointer;z-index:1001;">💬</button>
+    <!-- Chatbot Modal -->
+    <div id="chatbotModal" style="display:none;position:fixed;bottom:110px;right:32px;width:340px;max-width:95vw;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:1002;flex-direction:column;overflow:hidden;">
+        <div style="background:#2196f3;color:#fff;padding:16px 20px;font-weight:700;font-size:1.1rem;">Ask about Food Insecurity <span id='closeChatbot' style='float:right;cursor:pointer;font-weight:400;'>✖️</span></div>
+        <div id="chatbotMessages" style="padding:16px;height:220px;overflow-y:auto;font-size:1rem;background:#f7fbff;"></div>
+        <form id="chatbotForm" style="display:flex;border-top:1px solid #e3f4fd;">
+            <input id="chatbotInput" type="text" placeholder="Ask a question..." autocomplete="off" style="flex:1;padding:12px;border:none;font-size:1rem;outline:none;">
+            <button type="submit" style="background:#2196f3;color:#fff;border:none;padding:0 18px;font-size:1.3rem;cursor:pointer;">➤</button>
+        </form>
+    </div>
+    <script>
+    const chatbotAnswers = [
+        {q:/\bwhat( is|'s)? food insecurity\b|define food insecurity/i, a:"Food insecurity is the state of being without reliable access to a sufficient quantity of affordable, nutritious food."},
+        {q:/\bcauses? of food insecurity|why.*food insecurity|food insecurity.*causes?/i, a:"Common causes include poverty, unemployment, food deserts, high food prices, and natural disasters."},
+        {q:/\bsolutions?|reduce|fix|help|combat|address.*food insecurity/i, a:"Solutions include supporting food banks, reducing food waste, improving food distribution, and advocating for policy change."},
+        {q:/\bhow many.*people.*food insecurity|statistics|stats|prevalence/i, a:"Globally, hundreds of millions experience food insecurity. In the US, about 1 in 8 households are affected (USDA, 2022)."},
+        {q:/\bsigns?|symptoms?|effects?|impact.*food insecurity/i, a:"Effects include hunger, malnutrition, poor health, anxiety, and difficulty concentrating, especially in children."},
+        {q:/\bwhat can I do|how can I help|how to help|how to get involved/i, a:"You can help by donating to food banks, volunteering, reducing food waste, and raising awareness."},
+        {q:/\bfood waste|wasting food/i, a:"Food waste is a major contributor to food insecurity. Reducing waste helps make more food available to those in need."},
+        {q:/\bmalnutrition|nutrition/i, a:"Malnutrition is a result of not getting enough nutrients from food, often due to food insecurity."},
+        {q:/\bchildren.*food insecurity|kids.*food insecurity/i, a:"Children facing food insecurity may struggle in school, have health issues, and experience developmental delays."},
+        {q:/\bglobal.*food insecurity|worldwide.*food insecurity/i, a:"Food insecurity affects people worldwide, especially in regions facing conflict, climate change, or economic instability."},
+        {q:/\bhow to donate|where to donate|donation/i, a:"You can donate to local food banks, pantries, or organizations like Feeding America and World Food Programme."},
+        {q:/\bincreasing|trend|is food insecurity rising/i, a:"Food insecurity has increased in recent years due to the pandemic, inflation, and global conflicts."},
+        {q:/\bdifference between hunger and food insecurity|hunger vs food insecurity/i, a:"Hunger is the physical sensation of not having enough to eat. Food insecurity is the lack of reliable access to enough food."},
+        {q:/\bgovernment.*help|policy|government action/i, a:"Governments can help by funding food assistance programs, supporting farmers, and enacting policies to reduce poverty."},
+        {q:/\bcan food insecurity be solved|is there a solution/i, a:"With coordinated efforts in policy, community action, and reducing waste, food insecurity can be greatly reduced."},
+        {q:/\bexamples? of food insecurity|what does food insecurity look like/i, a:"Examples include skipping meals, eating less than needed, or worrying about running out of food."},
+        {q:/\bimpact of food waste|why is food waste bad/i, a:"Food waste contributes to food insecurity, environmental harm, and economic loss. Reducing waste helps everyone."},
+        {q:/\bhow to reduce food waste|tips to reduce food waste/i, a:"Plan meals, store food properly, use leftovers, and donate surplus food to reduce waste."},
+        {q:/\bis food insecurity only about poverty|other causes/i, a:"While poverty is a major factor, food insecurity can also result from disasters, supply chain issues, and food deserts."},
+        {q:/\bresources|where to get help|assistance/i, a:"You can find help at local food banks, community centers, and government assistance programs like SNAP."},
+        {q:/\bfood deserts?/i, a:"A food desert is an area with limited access to affordable and nutritious food, often contributing to food insecurity."},
+        {q:/\bwho is most at risk|vulnerable groups/i, a:"Children, elderly, low-income families, and people in rural or conflict-affected areas are most at risk."},
+        {q:/\bhow does climate change affect food insecurity/i, a:"Climate change can cause crop failures, food shortages, and price increases, worsening food insecurity."},
+        {q:/\bcan technology help/i, a:"Yes! Technology can improve food distribution, reduce waste, and connect people to resources."},
+        {q:/\bwhat is SNAP|food stamps/i, a:"SNAP (Supplemental Nutrition Assistance Program) is a US government program that helps low-income people buy food."},
+        {q:/\bhow to volunteer|volunteering/i, a:"You can volunteer at local food banks, soup kitchens, or community gardens to help fight food insecurity."}
+    ];
+
+    function getChatbotAnswer(q) {
+        for (const pair of chatbotAnswers) {
+            if (pair.q.test(q)) return pair.a;
+        }
+        // Fallback: try to be helpful
+        if (/hello|hi|hey/i.test(q)) return "Hello! How can I help you with questions about food insecurity?";
+        if (/thank/i.test(q)) return "You're welcome! Let me know if you have more questions.";
+        return "I'm here to help with questions about food insecurity, food waste, and ways to help. Try asking about causes, solutions, or resources!";
+    }
+
+    // UI logic (same as before)
+    const btn = document.getElementById('chatbotBtn');
+    const modal = document.getElementById('chatbotModal');
+    const closeBtn = document.getElementById('closeChatbot');
+    const messages = document.getElementById('chatbotMessages');
+    const form = document.getElementById('chatbotForm');
+    const input = document.getElementById('chatbotInput');
+    btn.onclick = () => { modal.style.display = 'flex'; setTimeout(()=>{input.focus()}, 200); };
+    closeBtn.onclick = () => { modal.style.display = 'none'; };
+    form.onsubmit = e => {
+        e.preventDefault();
+        const userMsg = input.value.trim();
+        if (!userMsg) return;
+        messages.innerHTML += `<div style='margin-bottom:8px;text-align:right;'><span style='background:#e3f4fd;color:#1976d2;padding:7px 13px;border-radius:14px 14px 2px 14px;display:inline-block;'>${userMsg}</span></div>`;
+        const botMsg = getChatbotAnswer(userMsg);
+        messages.innerHTML += `<div style='margin-bottom:8px;text-align:left;'><span style='background:#2196f3;color:#fff;padding:7px 13px;border-radius:14px 14px 14px 2px;display:inline-block;'>${botMsg}</span></div>`;
+        messages.scrollTop = messages.scrollHeight;
+        input.value = '';
+    };
+    </script>
 </body>
 </html>
