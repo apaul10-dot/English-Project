@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ML Model Interface</title>
+    <title>Hunger Stoppers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', Arial, sans-serif;
             margin: 0;
-            background-color: #f0f2f5;
             min-height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa 0%, #e3f2fd 100%);
         }
         .navbar {
             width: 100%;
-            background-color: #1a73e8;
+            background: #1a73e8;
             color: white;
             display: flex;
             align-items: center;
@@ -23,103 +24,14 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            height: 60px;
+            height: 64px;
+            box-shadow: 0 4px 16px rgba(26, 115, 232, 0.08);
         }
         .navbar-title {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.7rem;
+            font-weight: 700;
             letter-spacing: 2px;
             margin-right: 3rem;
-        }
-        .logo {
-            width: 60px;
-            height: auto;
-        }
-        .main-content {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            height: 100vh;
-            padding-top: 60px; /* for navbar */
-            box-sizing: border-box;
-        }
-        .welcome-message {
-            margin-left: 5vw;
-            background: white;
-            padding: 2rem 3rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            font-size: 2rem;
-            color: #1a73e8;
-            font-weight: bold;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 90%;
-        }
-        .logo {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 100px;
-            height: auto;
-            z-index: 1000;
-        }
-        .mission-statement {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #1a73e8;
-        }
-        .mission-statement h2 {
-            color: #1a73e8;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        .mission-statement p {
-            color: #333;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            margin: 0;
-            text-align: left;
-        }
-        h1 {
-            color: #1a73e8;
-            margin-bottom: 2rem;
-        }
-        .button-container {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .button {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            color: white;
-        }
-        .button-1 {
-            background-color: #663399;
-        }
-        .button-2 {
-            background-color: #34a853;
-        }
-        .button-3 {
-            background-color: #4285f4;
-        }
-        .button:hover {
-            opacity: 0.9;
         }
         .navbar-links {
             display: flex;
@@ -130,13 +42,50 @@
         .navbar-link {
             color: white;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            transition: text-decoration 0.2s, color 0.2s;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
         }
-        .navbar-link:hover {
-            text-decoration: underline;
-            color: #cce0ff;
+        .navbar-link:hover, .navbar-link.active {
+            background: #1565c0;
+            color: #b2ebf2;
+        }
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            padding-top: 64px;
+            box-sizing: border-box;
+        }
+        .welcome-message {
+            margin-left: 7vw;
+            background: white;
+            padding: 2.5rem 3.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(26, 115, 232, 0.10);
+            font-size: 2.2rem;
+            color: #1a73e8;
+            font-weight: 700;
+            max-width: 500px;
+        }
+        @media (max-width: 700px) {
+            .main-content {
+                justify-content: center;
+                padding-top: 80px;
+            }
+            .welcome-message {
+                margin-left: 0;
+                padding: 1.5rem 1rem;
+                font-size: 1.3rem;
+            }
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem 0.5rem;
+            }
         }
     </style>
 </head>
@@ -149,7 +98,6 @@
             <a href="/model2" class="navbar-link">Model 2 Results</a>
             <a href="/about" class="navbar-link">About Us</a>
         </div>
-        <img src="/images/logo.png" alt="Website Logo" class="logo">
     </div>
     <div class="main-content">
         <div class="welcome-message">
