@@ -71,6 +71,77 @@
             font-weight: 700;
             max-width: 500px;
         }
+        .game-bar {
+            margin-left: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(26, 115, 232, 0.10);
+            max-width: 600px;
+        }
+        .game-container {
+            color: #1a73e8;
+        }
+        .game-container h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        #question-container {
+            margin-bottom: 1.5rem;
+        }
+        #question-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .option-btn {
+            background: #e3f2fd;
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            color: #1a73e8;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-btn:hover {
+            background: #1a73e8;
+            color: white;
+        }
+        .option-btn.correct {
+            background: #4caf50;
+            border-color: #4caf50;
+            color: white;
+        }
+        .option-btn.incorrect {
+            background: #f44336;
+            border-color: #f44336;
+            color: white;
+        }
+        #score-container {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        #next-question {
+            margin-top: 1rem;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #next-question:hover {
+            background: #1565c0;
+        }
         @media (max-width: 700px) {
             .main-content {
                 justify-content: center;
@@ -85,6 +156,22 @@
                 flex-direction: column;
                 height: auto;
                 padding: 1rem 0.5rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                padding: 80px 1rem 2rem;
+            }
+            .welcome-message {
+                margin-left: 0;
+            }
+            .game-bar {
+                margin-left: 0;
+                width: 100%;
+                max-width: 500px;
             }
         }
     </style>
@@ -102,6 +189,21 @@
     <div class="main-content">
         <div class="welcome-message">
             Welcome to Hunger Stoppers
+        </div>
+        <div class="game-bar">
+            <div class="game-container">
+                <h2>Test Your Knowledge About Food Insecurity</h2>
+                <div id="game-content">
+                    <div id="question-container">
+                        <p id="question-text">Loading questions...</p>
+                    </div>
+                    <div id="options-container"></div>
+                    <div id="score-container">
+                        <p>Score: <span id="score">0</span>/<span id="total">0</span></p>
+                    </div>
+                    <button id="next-question" style="display: none;">Next Question</button>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Chatbot Button -->
@@ -174,6 +276,114 @@
         messages.scrollTop = messages.scrollHeight;
         input.value = '';
     };
+
+    // Game Logic
+    const questions = [
+        {
+            question: "What percentage of the world's population experiences food insecurity?",
+            options: ["5%", "10%", "25%", "30%"],
+            correct: 2
+        },
+        {
+            question: "Which of these is NOT a common cause of food insecurity?",
+            options: ["Poverty", "Food waste", "Excess food production", "Natural disasters"],
+            correct: 2
+        },
+        {
+            question: "How many people die from hunger-related causes each year?",
+            options: ["1 million", "5 million", "9 million", "15 million"],
+            correct: 2
+        },
+        {
+            question: "What is a 'food desert'?",
+            options: [
+                "A place with no food",
+                "An area with limited access to affordable, nutritious food",
+                "A desert where food grows",
+                "A place where food is free"
+            ],
+            correct: 1
+        },
+        {
+            question: "Which age group is most vulnerable to food insecurity?",
+            options: ["Adults", "Teenagers", "Children", "Elderly"],
+            correct: 2
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startGame() {
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const question = questions[currentQuestion];
+        document.getElementById('question-text').textContent = question.question;
+        document.getElementById('score').textContent = score;
+        document.getElementById('total').textContent = questions.length;
+
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+
+        question.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.className = 'option-btn';
+            button.textContent = option;
+            button.onclick = () => checkAnswer(index);
+            optionsContainer.appendChild(button);
+        });
+
+        document.getElementById('next-question').style.display = 'none';
+    }
+
+    function checkAnswer(selectedIndex) {
+        const question = questions[currentQuestion];
+        const buttons = document.getElementsByClassName('option-btn');
+        
+        for (let button of buttons) {
+            button.disabled = true;
+        }
+
+        if (selectedIndex === question.correct) {
+            buttons[selectedIndex].classList.add('correct');
+            score++;
+        } else {
+            buttons[selectedIndex].classList.add('incorrect');
+            buttons[question.correct].classList.add('correct');
+        }
+
+        document.getElementById('score').textContent = score;
+        document.getElementById('next-question').style.display = 'block';
+    }
+
+    document.getElementById('next-question').onclick = () => {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            showQuestion();
+        } else {
+            endGame();
+        }
+    };
+
+    function endGame() {
+        const gameContent = document.getElementById('game-content');
+        gameContent.innerHTML = `
+            <h3>Game Over!</h3>
+            <p>Your final score: ${score}/${questions.length}</p>
+            <button onclick="resetGame()" style="background: #1a73e8; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer;">Play Again</button>
+        `;
+    }
+
+    function resetGame() {
+        currentQuestion = 0;
+        score = 0;
+        startGame();
+    }
+
+    // Start the game when the page loads
+    window.onload = startGame;
     </script>
 </body>
 </html>
