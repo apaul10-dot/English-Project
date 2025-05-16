@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <style>
+        .research-section {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .chart-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .key-finding {
+            background: #e9ecef;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #0d6efd;
+            border-radius: 4px;
+        }
+        .stat-box {
+            background: #0d6efd;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .stat-box h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .solution-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .highlight-box {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #1976d2;
+        }
+        .abstract-section {
+            background: #fff3e0;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #ff9800;
+        }
+        .introduction-section {
+            background: #e8f5e9;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Understanding Food Insecurity: A Data-Driven Approach</h1>
+        
+        <div class="abstract-section">
+            <h2>Research Overview</h2>
+            <p>Food disparity is an international trend, driven by inefficiencies in poorly developed food distribution and agricultural infrastructure. Recent studies estimate post-harvest losses as key intervention points, with global median losses at 19.8%. India, as a major producer of most food commodities in agriculture, has relatively low post-harvest losses (3.2%), yet suffers from chronic hunger, ranking 111th out of 125 countries on the Global Hunger Index.</p>
+            
+            <p>This study utilized machine learning (ML) models in the form of gradient boosting regression to analyze Indian farm data, including such variables as pesticide, fertilizer, farm size, crop type, harvest date, and climatic conditions. The optimal model had an R² measure of 0.999 in predicting best farming practice based on local conditions. The optimization model increased food retention after post-harvest by 3.42% over modern methods, bringing food into the supply chain at no extra cost.</p>
+        </div>
+
+        <div class="introduction-section">
+            <h2>Introduction</h2>
+            <p>Food waste and inequality are closely linked global challenges with significant implications for environmental sustainability and public health, especially among adolescents. Food inequality, defined as insufficient access to safe, nutritious, and adequate food, affects populations across both high- and low-income countries. Economic, social, and cultural barriers further limit food access for youth, hindering physical and cognitive development and undermining long-term health equity.</p>
+            
+            <p>In sub-Saharan Africa, post-harvest losses account for up to 40 percent of food waste, increasing prices and making healthy diets unaffordable for millions. In high-income settings, 24.8 percent of adolescents in the United States live in food-insecure households, a condition associated with elevated cardiovascular risk and impaired growth and learning outcomes.</p>
+            
+            <p>This study focuses on India using AI models in crop yield prediction and optimizing the use of inputs, while differing from approaches in Tanzania and Malawi where the focus has been on more community-based methods such as upgrading networks of farmers, cooperative storage systems, and local infrastructure upgradation. In alignment with the United Nations Sustainable Development Goal 2 "Zero Hunger," we explore how AI can be applied to reduce food wastage across farms, retail, and households to optimize food inequality and promote food accessibility amongst adolescents and populations at risk around the world.</p>
+        </div>
+
+        <div class="research-section">
+            <h2>Regional Impact of Food Waste</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="solution-card">
+                        <h4>High-Income Countries</h4>
+                        <ul>
+                            <li>Food waste primarily occurs at retail and consumer levels</li>
+                            <li>Excess buying behavior is a major factor</li>
+                            <li>Strict cosmetic standards lead to waste</li>
+                            <li>Advanced technology and infrastructure available</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="solution-card">
+                        <h4>Low-Income Countries</h4>
+                        <ul>
+                            <li>Up to 40% post-harvest losses in sub-Saharan Africa</li>
+                            <li>Inadequate storage facilities</li>
+                            <li>Limited transport infrastructure</li>
+                            <li>Poor market access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="research-section">
+            <h2>AI Solutions and Innovation</h2>
+            <p>Our research utilizes machine learning models to analyze and optimize agricultural practices:</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="solution-card">
+                        <h4>Advanced Analysis</h4>
+                        <p>Our gradient boosting regression model analyzes:</p>
+                        <ul>
+                            <li>Pesticide usage</li>
+                            <li>Fertilizer application</li>
+                            <li>Farm size optimization</li>
+                            <li>Crop type selection</li>
+                            <li>Harvest timing</li>
+                            <li>Climatic conditions</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="solution-card">
+                        <h4>Results and Impact</h4>
+                        <ul>
+                            <li>R² measure of 0.999 in predicting best farming practices</li>
+                            <li>3.42% increase in food retention</li>
+                            <li>Improved supply chain efficiency</li>
+                            <li>Cost-effective implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="research-section">
+            <h2>Taking Action</h2>
+            <p>Here's how we can all contribute to reducing food insecurity:</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="solution-card">
+                        <h4>Individual Level</h4>
+                        <ul>
+                            <li>Better meal planning</li>
+                            <li>Proper food storage</li>
+                            <li>Reducing personal food waste</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="solution-card">
+                        <h4>Community Level</h4>
+                        <ul>
+                            <li>Supporting local food banks</li>
+                            <li>Community gardens</li>
+                            <li>Food sharing programs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="solution-card">
+                        <h4>Policy Level</h4>
+                        <ul>
+                            <li>Supporting food waste reduction policies</li>
+                            <li>Advocating for food security programs</li>
+                            <li>Promoting sustainable agriculture</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="research-section">
+            <h2>Future Directions</h2>
+            <p>Our research highlights several areas for future development:</p>
+            <div class="key-finding">
+                <ul>
+                    <li>Integration of real-time data for better predictions</li>
+                    <li>Expansion of AI models to include more food types</li>
+                    <li>Development of region-specific solutions</li>
+                    <li>Enhanced collaboration with industry professionals</li>
+                    <li>Implementation of community-based methods like upgrading farmer networks</li>
+                    <li>Development of cooperative storage systems</li>
+                    <li>Local infrastructure upgradation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+</body>
+</html> 
