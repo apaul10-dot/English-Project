@@ -1,0 +1,17 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Pattern -->
+    <rect width="200" height="200" fill="#E8F4FF"/>
+    <path d="M0 0L200 200M200 0L0 200" stroke="#CCE4FF" stroke-width="2"/>
+    <path d="M100 0V200M0 100H200" stroke="#CCE4FF" stroke-width="2"/>
+    
+    <!-- Center Logo -->
+    <circle cx="100" cy="100" r="40" fill="#2196F3"/>
+    <path d="M80 100C80 88.9543 88.9543 80 100 80C111.046 80 120 88.9543 120 100" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="100" cy="110" r="6" fill="white"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="40" cy="40" r="8" fill="#2196F3" opacity="0.3"/>
+    <circle cx="160" cy="40" r="8" fill="#2196F3" opacity="0.3"/>
+    <circle cx="40" cy="160" r="8" fill="#2196F3" opacity="0.3"/>
+    <circle cx="160" cy="160" r="8" fill="#2196F3" opacity="0.3"/>
+</svg> 

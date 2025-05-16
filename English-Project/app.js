@@ -11,6 +11,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
 const { isAuthenticated, isNotAuthenticated } = require('./middleware/auth');
 const flash = require('connect-flash');
+const mlModelRouter = require('./routes/mlModel');
+const gamesRouter = require('./routes/games');
+const indexRouter = require('./routes/index');
 
 const app = express();
 const port = 2002;
@@ -330,4 +333,8 @@ app.listen(port, async () => {
             console.error('Failed to start ngrok:', error);
         }
     }
-}); 
+});
+
+app.use('/model2', mlModelRouter);
+app.use('/games', gamesRouter);
+app.use('/', indexRouter); 

@@ -3,149 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %> - Hunger Stoppers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            min-height: 100vh;
-        }
-        .navbar {
-            background: #1a73e8;
-            padding: 0.8rem 2rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .navbar-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        .navbar-brand:hover .navbar-logo {
-            transform: rotate(10deg) scale(1.1);
-        }
-        .navbar-title {
-            color: white;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0;
-            background: linear-gradient(45deg, #ffffff, #e3f2fd);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .navbar-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-        .navbar-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            position: relative;
-            transition: color 0.3s ease;
-            white-space: nowrap;
-        }
-        .navbar-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: white;
-            transition: width 0.3s ease;
-        }
-        .navbar-link:hover::after {
-            width: 100%;
-        }
-        .navbar-link.active {
-            color: #e3f2fd;
-            font-weight: 600;
-        }
-        .navbar-link.active::after {
-            width: 100%;
-            background: #e3f2fd;
-        }
-        .container {
-            margin-top: 80px;
-            padding: 20px;
-        }
-        @media (max-width: 1024px) {
-            .navbar {
-                padding: 0.8rem 1rem;
-            }
-            .navbar-links {
-                gap: 1rem;
-            }
-            .navbar-link {
-                font-size: 0.9rem;
-            }
-        }
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-            }
-            .navbar-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.8rem;
-            }
-            .navbar-link {
-                font-size: 0.85rem;
-                padding: 0.3rem 0.5rem;
-            }
-            .container {
-                margin-top: 120px;
-            }
-        }
-    </style>
+    <title><%= title %> - Food Waste Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="/" class="navbar-brand">
-            <img src="/images/logo.png" alt="Hunger Stoppers Logo" class="navbar-logo">
-            <h1 class="navbar-title">HUNGER STOPPERS</h1>
-        </a>
-        <div class="navbar-links">
-            <a href="/" class="navbar-link <%= active === 'home' ? 'active' : '' %>">Home</a>
-            <a href="/food-insecurity" class="navbar-link <%= active === 'food-insecurity' ? 'active' : '' %>">Learn</a>
-            <a href="/model2" class="navbar-link <%= active === 'model2' ? 'active' : '' %>">ML Model</a>
-            <a href="/resources" class="navbar-link <%= active === 'resources' ? 'active' : '' %>">Resources</a>
-            <a href="/kids-game" class="navbar-link <%= active === 'kids-game' ? 'active' : '' %>">Game</a>
-            <a href="/about" class="navbar-link <%= active === 'about' ? 'active' : '' %>">About</a>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/login">Login</a>
-                    <a class="dropdown-item" href="/register">Register</a>
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="nav-logo">
+                <a href="/">
+                    <img src="/images/logo.svg" alt="Logo" class="logo-img">
+                    <span class="logo-text">Food Waste Education</span>
+                </a>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/" class="<%= active === 'home' ? 'active' : '' %>">Home</a>
+                <a href="/food-insecurity" class="<%= active === 'food-insecurity' ? 'active' : '' %>">Food Insecurity</a>
+                <a href="/learn" class="<%= active === 'learn' ? 'active' : '' %>">Learn</a>
+                <div class="dropdown">
+                    <a href="/games" class="<%= active === 'games' ? 'active' : '' %>">Games</a>
+                    <div class="dropdown-content">
+                        <a href="/games/word-scramble">Word Scramble</a>
+                        <a href="/games/memory-match">Memory Match</a>
+                        <a href="/games/quiz">Food Waste Quiz</a>
+                        <a href="/games/heroes">Food Waste Heroes</a>
+                    </div>
                 </div>
-            </li>
+                <div class="dropdown">
+                    <a href="/resources" class="<%= active === 'resources' ? 'active' : '' %>">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="/resources#education">Educational Materials</a>
+                        <a href="/resources#organizations">Organizations</a>
+                        <a href="/resources#tips">Waste Reduction Tips</a>
+                    </div>
+                </div>
+                <a href="/model2" class="<%= active === 'model2' ? 'active' : '' %>">ML Model</a>
+            </div>
+
+            <div class="nav-auth dropdown">
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="#" class="user-menu-btn">
+                        <img src="/images/default-avatar.svg" alt="User" class="user-avatar">
+                        <span><%= user.name %></span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/dashboard">Dashboard</a>
+                        <a href="/profile">Profile</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                <% } else { %>
+                    <a href="#" class="auth-menu-btn">Account</a>
+                    <div class="dropdown-content auth-dropdown">
+                        <a href="/login" class="login-btn">Login</a>
+                        <a href="/register" class="register-btn">Register</a>
+                    </div>
+                <% } %>
+            </div>
+        </nav>
+    </header>
+
+    <% if (typeof messages !== 'undefined' && messages.error) { %>
+        <div class="alert alert-error">
+            <%= messages.error %>
         </div>
-    </nav>
+    <% } %>
+
+    <% if (typeof messages !== 'undefined' && messages.success) { %>
+        <div class="alert alert-success">
+            <%= messages.success %>
+        </div>
+    <% } %>
+
+<style>
+.main-header {
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    gap: 0.5rem;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+    background: var(--primary-light);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+}
+
+.auth-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    background: var(--primary-light);
+}
+
+.auth-dropdown {
+    right: 0;
+    left: auto;
+}
+
+.user-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.login-btn,
+.register-btn {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    display: block;
+    text-align: center;
+}
+
+.login-btn {
+    color: var(--primary-color);
+}
+
+.register-btn {
+    color: var(--primary-color);
+    margin-top: 0.5rem;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+    background: var(--primary-light);
+}
+
+.alert {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.alert-error {
+    background: #fff5f5;
+    color: var(--error);
+    border: 1px solid #ffebee;
+}
+
+.alert-success {
+    background: #f0fff4;
+    color: var(--success);
+    border: 1px solid #c6f6d5;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+
+    .nav-auth {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .auth-dropdown {
+        width: 100%;
+        position: static;
+    }
+}
+</style>
 </body>
 </html> 

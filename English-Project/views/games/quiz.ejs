@@ -1,0 +1,457 @@
+<%- include('../partials/header') %>
+
+<div class="game-container">
+    <h1>Food Waste Quiz</h1>
+    <p class="game-description">Test your knowledge about food waste and sustainability. Choose the correct answer for each question!</p>
+    
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="quiz-progress">
+                Question <span id="current-question">1</span> of <span id="total-questions">10</span>
+            </div>
+            <div class="quiz-score">
+                Score: <span id="score">0</span>
+            </div>
+        </div>
+        
+        <div class="question-container">
+            <h2 id="question-text"></h2>
+            <div id="options-container" class="options-container">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+        
+        <div id="feedback" class="feedback hidden">
+            <div class="feedback-content">
+                <h3 id="feedback-text"></h3>
+                <p id="explanation-text"></p>
+                <button id="next-btn">Next Question</button>
+            </div>
+        </div>
+        
+        <div id="quiz-complete" class="quiz-complete hidden">
+            <div class="complete-content">
+                <h2>Quiz Complete!</h2>
+                <p>Your final score: <span id="final-score">0</span> out of <span id="max-score">0</span></p>
+                <div id="performance-message"></div>
+                <button onclick="startNewQuiz()">Try Again</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.game-container {
+    max-width: 800px;
+    margin: 100px auto 40px;
+    padding: 20px;
+}
+
+.game-description {
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.quiz-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e8f0fe;
+}
+
+.quiz-progress {
+    color: #666;
+    font-weight: 500;
+}
+
+.quiz-score {
+    background: #e8f0fe;
+    color: #1a73e8;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+.question-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.options-container {
+    display: grid;
+    gap: 15px;
+}
+
+.option {
+    padding: 15px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.option:hover {
+    background: #e8f0fe;
+    border-color: #1a73e8;
+}
+
+.option.correct {
+    background: #d4edda;
+    border-color: #28a745;
+}
+
+.option.incorrect {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+
+.feedback {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.feedback.hidden {
+    display: none;
+}
+
+.feedback-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.feedback-content h3 {
+    color: #1a73e8;
+    margin-bottom: 15px;
+}
+
+.feedback-content p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.feedback-content button,
+.complete-content button {
+    padding: 10px 20px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.feedback-content button:hover,
+.complete-content button:hover {
+    background: #1557b0;
+}
+
+.quiz-complete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.quiz-complete.hidden {
+    display: none;
+}
+
+.complete-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.complete-content h2 {
+    color: #1a73e8;
+    margin-bottom: 20px;
+}
+
+#performance-message {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .quiz-container {
+        padding: 20px;
+    }
+    
+    .quiz-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+</style>
+
+<script>
+const questions = [
+    {
+        question: "How much food is wasted globally each year?",
+        options: [
+            "About 1/3 of all food produced",
+            "About 1/10 of all food produced",
+            "About 1/2 of all food produced",
+            "About 1/5 of all food produced"
+        ],
+        correct: 0,
+        explanation: "Approximately one-third of all food produced globally is lost or wasted, equivalent to about 1.3 billion tonnes per year."
+    },
+    {
+        question: "Which of these is NOT a good way to reduce food waste?",
+        options: [
+            "Planning meals in advance",
+            "Buying in bulk without a plan",
+            "Storing food properly",
+            "Using leftovers creatively"
+        ],
+        correct: 1,
+        explanation: "Buying in bulk without a plan often leads to food spoilage and waste. It's better to plan purchases based on specific meal plans."
+    },
+    {
+        question: "What is the best way to store leafy greens?",
+        options: [
+            "In an airtight container with a paper towel",
+            "Loose in the refrigerator",
+            "In a plastic bag on the counter",
+            "In water at room temperature"
+        ],
+        correct: 0,
+        explanation: "Leafy greens stay fresh longest when stored in an airtight container with a paper towel to absorb excess moisture."
+    },
+    {
+        question: "Which food typically creates the most waste in households?",
+        options: [
+            "Fruits and vegetables",
+            "Meat products",
+            "Dairy products",
+            "Grains and bread"
+        ],
+        correct: 0,
+        explanation: "Fruits and vegetables are the most wasted food items in households, often due to improper storage or overbuying."
+    },
+    {
+        question: "What is 'ugly produce'?",
+        options: [
+            "Fruits and vegetables with unusual shapes or appearances",
+            "Expired food",
+            "Moldy food",
+            "Processed food"
+        ],
+        correct: 0,
+        explanation: "Ugly produce refers to fruits and vegetables that are perfectly edible but don't meet conventional beauty standards for retail sale."
+    },
+    {
+        question: "What percentage of food waste occurs at the consumer level in developed countries?",
+        options: [
+            "40-50%",
+            "10-20%",
+            "70-80%",
+            "20-30%"
+        ],
+        correct: 0,
+        explanation: "In developed countries, 40-50% of total food waste occurs at the consumer level, including households and food service."
+    },
+    {
+        question: "Which of these is a proper way to reduce food waste in restaurants?",
+        options: [
+            "Offering different portion sizes",
+            "Preparing all food in advance",
+            "Discarding food at the end of each day",
+            "Serving larger portions"
+        ],
+        correct: 0,
+        explanation: "Offering different portion sizes allows customers to order according to their appetite, reducing plate waste."
+    },
+    {
+        question: "What is composting?",
+        options: [
+            "A natural recycling process for organic waste",
+            "A way to preserve food",
+            "A cooking method",
+            "A food storage technique"
+        ],
+        correct: 0,
+        explanation: "Composting is a natural process that converts organic waste into nutrient-rich soil amendment."
+    },
+    {
+        question: "Which environmental impact is associated with food waste?",
+        options: [
+            "All of the above",
+            "Greenhouse gas emissions",
+            "Water waste",
+            "Land use"
+        ],
+        correct: 0,
+        explanation: "Food waste contributes to greenhouse gas emissions, wastes water used in production, and wastes land used for growing."
+    },
+    {
+        question: "What is the best way to use overripe bananas?",
+        options: [
+            "Make banana bread or smoothies",
+            "Throw them away",
+            "Feed them to pets",
+            "Plant them"
+        ],
+        correct: 0,
+        explanation: "Overripe bananas are perfect for making banana bread, smoothies, or other baked goods, reducing food waste."
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let canAnswer = true;
+
+function displayQuestion() {
+    const question = questions[currentQuestion];
+    document.getElementById('question-text').textContent = question.question;
+    document.getElementById('current-question').textContent = currentQuestion + 1;
+    document.getElementById('total-questions').textContent = questions.length;
+    
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = question.options
+        .map((option, index) => `
+            <div class="option" data-index="${index}">
+                ${option}
+            </div>
+        `)
+        .join('');
+    
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', () => checkAnswer(parseInt(option.dataset.index)));
+    });
+}
+
+function checkAnswer(selectedIndex) {
+    if (!canAnswer) return;
+    canAnswer = false;
+    
+    const question = questions[currentQuestion];
+    const options = document.querySelectorAll('.option');
+    const feedback = document.getElementById('feedback');
+    const feedbackText = document.getElementById('feedback-text');
+    const explanationText = document.getElementById('explanation-text');
+    
+    options[selectedIndex].classList.add(
+        selectedIndex === question.correct ? 'correct' : 'incorrect'
+    );
+    options[question.correct].classList.add('correct');
+    
+    if (selectedIndex === question.correct) {
+        score++;
+        document.getElementById('score').textContent = score;
+        feedbackText.textContent = 'Correct!';
+    } else {
+        feedbackText.textContent = 'Incorrect!';
+    }
+    
+    explanationText.textContent = question.explanation;
+    feedback.classList.remove('hidden');
+}
+
+function nextQuestion() {
+    document.getElementById('feedback').classList.add('hidden');
+    currentQuestion++;
+    canAnswer = true;
+    
+    if (currentQuestion < questions.length) {
+        displayQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    const quizComplete = document.getElementById('quiz-complete');
+    const finalScore = document.getElementById('final-score');
+    const maxScore = document.getElementById('max-score');
+    const performanceMessage = document.getElementById('performance-message');
+    
+    finalScore.textContent = score;
+    maxScore.textContent = questions.length;
+    
+    const percentage = (score / questions.length) * 100;
+    let message = '';
+    let color = '';
+    
+    if (percentage >= 90) {
+        message = "Excellent! You're a food waste expert!";
+        color = '#28a745';
+    } else if (percentage >= 70) {
+        message = "Good job! You know quite a bit about food waste!";
+        color = '#17a2b8';
+    } else if (percentage >= 50) {
+        message = "Not bad! But there's room for improvement.";
+        color = '#ffc107';
+    } else {
+        message = "Keep learning about food waste and try again!";
+        color = '#dc3545';
+    }
+    
+    performanceMessage.textContent = message;
+    performanceMessage.style.backgroundColor = color + '20';
+    performanceMessage.style.color = color;
+    
+    quizComplete.classList.remove('hidden');
+}
+
+function startNewQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    canAnswer = true;
+    document.getElementById('score').textContent = '0';
+    document.getElementById('quiz-complete').classList.add('hidden');
+    questions.sort(() => Math.random() - 0.5);
+    displayQuestion();
+}
+
+document.getElementById('next-btn').addEventListener('click', nextQuestion);
+
+// Start the quiz
+startNewQuiz();
+</script>
+
+<%- include('../partials/footer') %> 

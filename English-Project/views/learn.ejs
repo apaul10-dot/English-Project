@@ -1,0 +1,515 @@
+<%- include('partials/header') %>
+
+<div class="learn-container">
+    <div class="section-title">
+        <h1>Learn About Food Waste</h1>
+        <p>Explore interactive lessons and resources to understand food waste and its impact on our world.</p>
+    </div>
+
+    <div class="learning-paths grid-3">
+        <div class="learning-path card">
+            <div class="path-icon">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <circle cx="25" cy="25" r="23" fill="var(--primary-color)"/>
+                    <path d="M15 25L22 32L35 19" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3>Basics of Food Waste</h3>
+            <p>Learn the fundamentals of food waste, its causes, and global impact.</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+            <a href="#" class="btn btn-primary start-lesson" data-lesson="basics">Start Learning</a>
+        </div>
+
+        <div class="learning-path card">
+            <div class="path-icon">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <circle cx="25" cy="25" r="23" fill="var(--primary-color)"/>
+                    <path d="M17 25C17 21 20 18 25 18C30 18 33 21 33 25" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="25" cy="30" r="3" fill="white"/>
+                </svg>
+            </div>
+            <h3>Prevention Strategies</h3>
+            <p>Discover effective methods to reduce food waste in your daily life.</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+            <a href="#" class="btn btn-primary start-lesson" data-lesson="prevention">Start Learning</a>
+        </div>
+
+        <div class="learning-path card">
+            <div class="path-icon">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <circle cx="25" cy="25" r="23" fill="var(--primary-color)"/>
+                    <path d="M20 30L25 20L30 30" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="25" cy="25" r="8" stroke="white" stroke-width="2"/>
+                </svg>
+            </div>
+            <h3>Sustainable Solutions</h3>
+            <p>Explore innovative solutions and technologies to combat food waste.</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+            <a href="#" class="btn btn-primary start-lesson" data-lesson="solutions">Start Learning</a>
+        </div>
+    </div>
+
+    <div id="lesson-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="lesson-content">
+                <h2 id="lesson-title"></h2>
+                <div id="lesson-text"></div>
+                <div class="lesson-navigation">
+                    <button class="btn btn-outline prev-slide" disabled>Previous</button>
+                    <span class="slide-counter">1/5</span>
+                    <button class="btn btn-primary next-slide">Next</button>
+                </div>
+            </div>
+            <div class="lesson-complete hidden">
+                <h2>Lesson Complete!</h2>
+                <p>Great job! You've completed this lesson.</p>
+                <div class="achievement">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="50" r="45" fill="var(--success)"/>
+                        <path d="M30 50L45 65L70 35" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>+50 Points Earned</p>
+                </div>
+                <button class="btn btn-primary close-lesson">Continue Learning</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="achievements section">
+        <div class="section-title">
+            <h2>Your Achievements</h2>
+            <p>Track your progress and earn badges as you learn.</p>
+        </div>
+        <div class="achievements-grid grid-4">
+            <div class="achievement-card card">
+                <div class="achievement-icon locked">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" fill="#ccc"/>
+                        <path d="M15 20L18 23L25 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h4>Beginner Learner</h4>
+                <p>Complete your first lesson</p>
+            </div>
+            <!-- More achievement cards will be added dynamically -->
+        </div>
+    </div>
+</div>
+
+<style>
+.learn-container {
+    max-width: 1200px;
+    margin: 100px auto 40px;
+    padding: 0 20px;
+}
+
+.learning-paths {
+    margin-bottom: 60px;
+}
+
+.learning-path {
+    text-align: center;
+    padding: 2rem;
+}
+
+.path-icon {
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--primary-light);
+    border-radius: 3px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+}
+
+.modal-content {
+    position: relative;
+    background: var(--white);
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 2rem;
+    border-radius: 12px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-modal {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.lesson-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.lesson-complete {
+    text-align: center;
+}
+
+.lesson-complete .achievement {
+    margin: 2rem 0;
+}
+
+.achievements-grid {
+    margin-top: 2rem;
+}
+
+.achievement-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.achievement-icon {
+    margin-bottom: 1rem;
+}
+
+.achievement-icon.locked {
+    opacity: 0.5;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .learn-container {
+        padding: 0 15px;
+    }
+
+    .modal-content {
+        margin: 20px;
+        padding: 1.5rem;
+    }
+}
+</style>
+
+<script>
+const lessons = {
+    basics: {
+        title: "Basics of Food Waste",
+        slides: [
+            {
+                title: "What is Food Waste?",
+                content: `
+                    <p>Food waste refers to food that is discarded or lost uneaten. This can happen at any stage of the food supply chain, from production to consumption.</p>
+                    <ul>
+                        <li>Production waste</li>
+                        <li>Processing waste</li>
+                        <li>Retail waste</li>
+                        <li>Consumer waste</li>
+                    </ul>
+                `
+            },
+            {
+                title: "The Scale of the Problem",
+                content: `
+                    <p>Approximately one-third of all food produced globally goes to waste. This amounts to about 1.3 billion tonnes per year.</p>
+                    <div class="stat-box">
+                        <h3>1.3 Billion Tonnes</h3>
+                        <p>of food wasted annually</p>
+                    </div>
+                `
+            },
+            {
+                title: "Environmental Impact",
+                content: `
+                    <p>Food waste has severe environmental consequences:</p>
+                    <ul>
+                        <li>Greenhouse gas emissions from decomposing food</li>
+                        <li>Wasted water resources</li>
+                        <li>Loss of biodiversity</li>
+                        <li>Land degradation</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Economic Impact",
+                content: `
+                    <p>The economic cost of food waste is substantial:</p>
+                    <ul>
+                        <li>$1 trillion in direct economic costs</li>
+                        <li>$700 billion in environmental costs</li>
+                        <li>$900 billion in social costs</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Social Impact",
+                content: `
+                    <p>While millions of tonnes of food are wasted:</p>
+                    <ul>
+                        <li>821 million people are undernourished</li>
+                        <li>1 in 9 people go to bed hungry</li>
+                        <li>Food insecurity affects millions</li>
+                    </ul>
+                `
+            }
+        ]
+    },
+    prevention: {
+        title: "Prevention Strategies",
+        slides: [
+            {
+                title: "Smart Shopping",
+                content: `
+                    <p>Plan your grocery shopping:</p>
+                    <ul>
+                        <li>Make a shopping list</li>
+                        <li>Check your inventory first</li>
+                        <li>Don't shop hungry</li>
+                        <li>Buy only what you need</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Proper Storage",
+                content: `
+                    <p>Store food correctly to extend its life:</p>
+                    <ul>
+                        <li>Use airtight containers</li>
+                        <li>Know optimal temperatures</li>
+                        <li>Understand ripening</li>
+                        <li>First in, first out principle</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Meal Planning",
+                content: `
+                    <p>Plan your meals in advance:</p>
+                    <ul>
+                        <li>Weekly meal plans</li>
+                        <li>Portion control</li>
+                        <li>Use leftovers creatively</li>
+                        <li>Batch cooking</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Understanding Labels",
+                content: `
+                    <p>Know the difference between date labels:</p>
+                    <ul>
+                        <li>"Best by" dates</li>
+                        <li>"Use by" dates</li>
+                        <li>"Sell by" dates</li>
+                        <li>Visual inspection</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Composting",
+                content: `
+                    <p>When food waste is unavoidable:</p>
+                    <ul>
+                        <li>Start a compost bin</li>
+                        <li>What to compost</li>
+                        <li>Composting methods</li>
+                        <li>Using compost</li>
+                    </ul>
+                `
+            }
+        ]
+    },
+    solutions: {
+        title: "Sustainable Solutions",
+        slides: [
+            {
+                title: "Technology Solutions",
+                content: `
+                    <p>Modern solutions to reduce waste:</p>
+                    <ul>
+                        <li>Smart inventory systems</li>
+                        <li>Food sharing apps</li>
+                        <li>Waste tracking software</li>
+                        <li>Smart packaging</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Community Initiatives",
+                content: `
+                    <p>Local solutions for food waste:</p>
+                    <ul>
+                        <li>Food banks</li>
+                        <li>Community composting</li>
+                        <li>Gleaning programs</li>
+                        <li>Education programs</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Policy Changes",
+                content: `
+                    <p>Government and institutional changes:</p>
+                    <ul>
+                        <li>Food donation laws</li>
+                        <li>Tax incentives</li>
+                        <li>Waste reduction targets</li>
+                        <li>Educational initiatives</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Business Solutions",
+                content: `
+                    <p>Corporate responsibility:</p>
+                    <ul>
+                        <li>Improved inventory management</li>
+                        <li>Donation programs</li>
+                        <li>Employee training</li>
+                        <li>Sustainable packaging</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Future Innovations",
+                content: `
+                    <p>Emerging solutions:</p>
+                    <ul>
+                        <li>AI-powered waste reduction</li>
+                        <li>Biodegradable packaging</li>
+                        <li>Vertical farming</li>
+                        <li>Precision agriculture</li>
+                    </ul>
+                `
+            }
+        ]
+    }
+};
+
+let currentLesson = null;
+let currentSlide = 0;
+
+document.querySelectorAll('.start-lesson').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lessonType = e.target.dataset.lesson;
+        startLesson(lessonType);
+    });
+});
+
+function startLesson(lessonType) {
+    currentLesson = lessonType;
+    currentSlide = 0;
+    const lesson = lessons[lessonType];
+    
+    document.getElementById('lesson-title').textContent = lesson.title;
+    updateSlideContent();
+    document.getElementById('lesson-modal').style.display = 'block';
+    document.querySelector('.lesson-content').classList.remove('hidden');
+    document.querySelector('.lesson-complete').classList.add('hidden');
+}
+
+function updateSlideContent() {
+    const lesson = lessons[currentLesson];
+    const slide = lesson.slides[currentSlide];
+    
+    document.getElementById('lesson-text').innerHTML = `
+        <h3>${slide.title}</h3>
+        ${slide.content}
+    `;
+    
+    document.querySelector('.slide-counter').textContent = `${currentSlide + 1}/${lesson.slides.length}`;
+    
+    document.querySelector('.prev-slide').disabled = currentSlide === 0;
+    const nextButton = document.querySelector('.next-slide');
+    if (currentSlide === lesson.slides.length - 1) {
+        nextButton.textContent = 'Complete';
+    } else {
+        nextButton.textContent = 'Next';
+    }
+}
+
+document.querySelector('.prev-slide').addEventListener('click', () => {
+    if (currentSlide > 0) {
+        currentSlide--;
+        updateSlideContent();
+    }
+});
+
+document.querySelector('.next-slide').addEventListener('click', () => {
+    const lesson = lessons[currentLesson];
+    if (currentSlide < lesson.slides.length - 1) {
+        currentSlide++;
+        updateSlideContent();
+    } else {
+        completeLesson();
+    }
+});
+
+function completeLesson() {
+    document.querySelector('.lesson-content').classList.add('hidden');
+    document.querySelector('.lesson-complete').classList.remove('hidden');
+    
+    // Update progress bar
+    const progressBar = document.querySelector(`[data-lesson="${currentLesson}"]`)
+        .parentElement.querySelector('.progress');
+    progressBar.style.width = '100%';
+    
+    // Update achievements
+    updateAchievements();
+}
+
+function updateAchievements() {
+    const achievementsGrid = document.querySelector('.achievements-grid');
+    const completedLessons = Array.from(document.querySelectorAll('.progress'))
+        .filter(bar => bar.style.width === '100%').length;
+    
+    if (completedLessons === 1) {
+        const beginnerBadge = achievementsGrid.querySelector('.achievement-card');
+        beginnerBadge.querySelector('.achievement-icon').classList.remove('locked');
+        beginnerBadge.querySelector('circle').setAttribute('fill', 'var(--success)');
+    }
+}
+
+document.querySelector('.close-modal').addEventListener('click', () => {
+    document.getElementById('lesson-modal').style.display = 'none';
+});
+
+document.querySelector('.close-lesson').addEventListener('click', () => {
+    document.getElementById('lesson-modal').style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('lesson-modal');
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+</script>
+
+<%- include('partials/footer') %> 

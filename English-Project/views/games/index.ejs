@@ -1,0 +1,121 @@
+<%- include('../partials/header') %>
+
+<div class="games-container">
+    <h1>Educational Games</h1>
+    <p class="games-intro">Learn about food waste and sustainability through fun interactive games!</p>
+
+    <div class="games-grid">
+        <div class="game-card">
+            <img src="/images/word-scramble.svg" alt="Word Scramble" class="game-icon">
+            <h3>Word Scramble</h3>
+            <p>Unscramble words related to food waste and sustainability.</p>
+            <a href="/games/word-scramble" class="play-btn">Play Now</a>
+        </div>
+
+        <div class="game-card">
+            <img src="/images/memory-match.svg" alt="Memory Match" class="game-icon">
+            <h3>Memory Match</h3>
+            <p>Match pairs of cards while learning about food conservation.</p>
+            <a href="/games/memory-match" class="play-btn">Play Now</a>
+        </div>
+
+        <div class="game-card">
+            <img src="/images/quiz.svg" alt="Food Waste Quiz" class="game-icon">
+            <h3>Food Waste Quiz</h3>
+            <p>Test your knowledge about food waste and its impact.</p>
+            <a href="/games/quiz" class="play-btn">Play Now</a>
+        </div>
+
+        <div class="game-card">
+            <img src="/images/heroes.svg" alt="Food Waste Heroes" class="game-icon">
+            <h3>Food Waste Heroes</h3>
+            <p>Help save food and become a sustainability hero!</p>
+            <a href="/games/heroes" class="play-btn">Play Now</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.games-container {
+    max-width: 1200px;
+    margin: 80px auto 2rem;
+    padding: 2rem;
+}
+
+.games-container h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.games-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.game-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.play-btn {
+    display: inline-block;
+    background: #1a73e8;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.play-btn:hover {
+    background: #1557b0;
+}
+
+@media (max-width: 768px) {
+    .games-container {
+        padding: 1rem;
+        margin-top: 120px;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<%- include('../partials/footer') %> 
