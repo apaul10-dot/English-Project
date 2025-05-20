@@ -110,6 +110,23 @@ app.get('/about', (req, res) => {
     res.render('about', { title: 'About Us', active: 'about' });
 });
 
+// Terms and Privacy Policy routes
+app.get('/terms', (req, res) => {
+    res.render('terms', { 
+        title: 'Terms and Conditions',
+        active: 'terms',
+        user: req.user
+    });
+});
+
+app.get('/privacy', (req, res) => {
+    res.render('privacy', { 
+        title: 'Privacy Policy',
+        active: 'privacy',
+        user: req.user
+    });
+});
+
 // Model prediction route
 app.post('/model2', async (req, res) => {
     try {

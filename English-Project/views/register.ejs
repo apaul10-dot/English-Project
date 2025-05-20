@@ -40,11 +40,12 @@
                        placeholder="Confirm your password" autocomplete="new-password">
             </div>
 
-            <div class="form-group">
+            <div class="form-group terms-group">
                 <label class="checkbox-label">
                     <input type="checkbox" name="terms" required>
                     I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>
                 </label>
+                <small class="terms-note">By creating an account, you agree to our Terms of Service and Privacy Policy. Please read them carefully.</small>
             </div>
 
             <button type="submit" class="auth-button">Create Account</button>
@@ -53,6 +54,14 @@
         <div class="auth-links">
             <p>Already have an account? <a href="/login">Login here</a></p>
         </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-links">
+        <a href="/terms">Terms and Conditions</a>
+        <span class="separator">|</span>
+        <a href="/privacy">Privacy Policy</a>
     </div>
 </div>
 
@@ -111,6 +120,13 @@
         margin-top: 0.3rem;
     }
 
+    .terms-group {
+        background: #f8fafc;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+    }
+
     .checkbox-label {
         display: flex;
         align-items: center;
@@ -127,10 +143,18 @@
     .checkbox-label a {
         color: #1a73e8;
         text-decoration: none;
+        font-weight: 500;
     }
 
     .checkbox-label a:hover {
         text-decoration: underline;
+    }
+
+    .terms-note {
+        font-size: 0.8rem;
+        color: #718096;
+        margin-top: 0.5rem;
+        line-height: 1.4;
     }
 
     .auth-button {
@@ -174,6 +198,34 @@
         margin-bottom: 1rem;
         font-size: 0.95rem;
         text-align: center;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .footer-links {
+        font-size: 0.9rem;
+    }
+
+    .footer-links a {
+        color: #1a73e8;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+        color: #1565c0;
+        text-decoration: underline;
+    }
+
+    .separator {
+        margin: 0 10px;
+        color: #666;
     }
 
     @media (max-width: 480px) {
